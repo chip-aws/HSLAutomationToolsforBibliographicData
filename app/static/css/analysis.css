@@ -1,0 +1,76 @@
+h1, h2 {
+        color: rgb(0, 179, 173);
+        margin-bottom: 2%;
+    }
+    .body {
+        margin-left: 5%;
+        margin-top: 1%;
+    }
+    .time {
+   		width: 90%;
+   		margin: auto;
+   		border-collapse: collapse;
+   		margin-bottom: 20px;
+   		font-size: 15px;
+	}
+	.time td {
+    	text-align: center;
+    	padding-right: 40%;
+  	}
+   	.time th {
+     	padding: 15px;
+   	}
+   	.time tr {
+   	    border-top: 2px solid rgb(197, 203, 212);
+   	    border-bottom: 2px solid rgb(197, 203, 212);
+   	}
+   	.data {
+   	    width: 80%;
+   	}
+   	.background {
+   		background-color: rgb(0, 179, 173);
+   	}
+   	.review {
+   	    width: 90%;
+   		margin: auto;
+   		border-collapse: collapse;
+   		margin-bottom: 5px;
+   		font-size: 15px;
+   	}
+   	.review td {
+    	text-align: center;
+    	padding-right: 40%;
+  	}
+  	.review th{
+     	padding: 15px;
+   	}
+   	.submit {
+		margin-top: 2%;
+		border: none;
+		background-color: rgb(13, 46, 191);
+		border-radius: 4px;
+		color: whitesmoke;
+		width: 85px;
+		height: 35px;
+		transition: 0.3s;
+		margin-bottom: 20px;
+	}
+	.submit:hover {
+		background-color: rgb(6, 28, 125);
+	}
+	.center {
+		text-align: center;
+	}
+	.placeholder {
+		display: none;
+	}
+	.table {
+	   table-layout: automatic;
+	   width: 90%;
+	}
+	.table tbody tr td{
+	   max-width: 250px; /* Customise it accordingly */
+	   overflow: hidden;
+	   text-overflow: ellipsis;
+	   white-space: nowrap;
+	}

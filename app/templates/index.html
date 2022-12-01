@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block content %}
+<body>
+  <table>
+    <tr style="margin: 5px; background-color: #b9eff0;" class='buttons'>
+      <th><a href="#" onclick="window.location.href='{{ url_for('.cluster_select_file') }}';" style="--clr:#1e9bff"><span>text analyze</span><i></i></a></th>
+      <th><a href="#" onclick="window.location.href='{{ url_for('.ris_to_csv') }}';" style="--clr:#6eff3e"><span>ris to csv</span><i></i></a></th>
+      <th><a href="#" onclick="window.location.href='{{ url_for('.csv_to_ris') }}';" style="--clr:#ff1867"><span>csv to ris</span><i></i></a></th>
+    </tr>
+    <tr style="border-top: 2px solid rgb(197, 203, 212);">
+      <td>Topic Extraction (Unsupervised Clustering)</td>
+      <td style="margin-left: 45px;">Convert RIS files to CSV files</td>
+      <td>Convert CSV files to RIS files</td>
+    </tr>
+    <tr style="margin: 5px; background-color: #b9eff0; border-top: 2px solid rgb(197, 203, 212);" class='buttons'>
+      <th><a href="#" onclick="window.location.href='{{ url_for('.sup_cluster_select_file') }}';" style="--clr:#1e9bff"><span>Supervised Clustering</span><i></i></a></th>
+      <th><a href="#" style="--clr:#6eff3e"><span>Supervised Machine Learning</span><i></i></a></th>
+    <tr style="border-top: 2px solid rgb(197, 203, 212);">
+      <td>Classify records as "relevant" or "not relevant" using a manually classified set of relevant records as seed values</td>
+      <td style="margin-left: 45px;">Classify records as "relevant" or "not relevant" by training a machine learning model on a manually classified set of records</td>
+     </tr>
+  </table>
+</body>
+<p style="margin: 0px 50px 20px 5%;">Credit to <a href="https://hsl.lib.unc.edu/">@UNC Health Science Library</a></p>
+{% endblock %}

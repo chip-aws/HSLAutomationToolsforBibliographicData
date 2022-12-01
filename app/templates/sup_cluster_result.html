@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/analysis.css')}}">
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/button_nav.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="body">
+	<form class="form" method="post">
+		{{ form.csrf_token }}
+		{{ form.outputfile(class="placeholder") }}
+		<h2>Results</h2>
+		<div>Download file: <a href="{{ url_for('.download_file', filename=form.outputfile.data) }}"
+							   target="_blank"  style="margin-right: 5px;">
+					 {{ form.outputfile.data }} </a></div>
+		<table class="time">
+			<tr>
+				<th>Job Time</th>
+				<td>{{job_time}}</td>
+			</tr>
+		</table>
+
+		<h2>Topic Table</h2>
+		<div align="center" style="overflow-x: scroll; max-height: 500px; overflow-y: scroll;">
+		  <table id="data" class="table table-striped" style="table-layout:automatic">
+			<thead>
+			  <tr>
+				<! -- define head -->
+				{% for head in heading%}
+					<th>{{head}}</th>
+				{% endfor %}
+			  </tr>
+			</thead>
+			<tbody>
+			  {% for row in array %}
+				<tr>
+				  {% for cell in row %}
+				  <td>{{ row[cell] }}</td>
+				  {% endfor %}
+				</tr>
+			  {% endfor %}
+			</tbody>
+		  </table>
+		</div>
+
+
+		<h2>Inputs</h2>
+		<table class="review">
+			<tr class="background">
+				<th>Filename</th>
+				<td>{{ form.filename.data }}</td>
+			</tr>
+			<tr>
+				<th>Text Field</th>
+				<td>{{ form.columns.data }}</td>
+			</tr>
+			<tr>
+				<th>Seeds Field</th>
+				<td>{{ form.seeds.data }}</td>
+			</tr>
+			<tr class="background">
+				<th>Other Configuration</th>
+				<td></td>
+			</tr>
+			<tr>
+				<th>Recall Threshold</th>
+				<td>{{ form.threshold.data }}</td>
+			</tr>
+			<tr>
+				<th>Stop Words</th>
+				<td>{{ form.stopwords.data }}</td>
+			</tr>
+			<tr>
+				<th>Output Type</th>
+				<td>{{ form.output_type.data }}</td>
+			</tr>
+		</table>
+
+		<div class="center">
+			<input type="submit" value="Download" class="submit">
+		</div>
+	</form>
+</div>
+
+{% endblock %}

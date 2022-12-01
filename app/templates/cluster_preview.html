@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/review.css')}}">
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/button_nav.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<div class="tabs">
+	<form action="/back_index" method="post">
+		<button class="not-chosen clickable">Select an Input File</button>
+	</form>
+	<form action="/back_select" method="post">
+		<input type="text" name="filename" id="filename"  value="{{ form.filename.data }}" class="placeholder">
+		<button class ="not-chosen clickable">Select Text</button>
+	</form>
+	<form action="/algorithm" method="post">
+		<input type="text" name="filename" id="file" value="{{ form.filename.data }}" class="placeholder">
+
+		<button class ="not-chosen clickable">Set Algorithm Configuration</button>
+	</form>
+	<button class ="chosen clickable">Run Topic Extraction</button>
+</div>
+
+<div class="body">
+	<h3><center>Review Inputs</center></h3>
+
+	<table>
+		<tr class="background">
+			<th>Filename</th>
+			<td>{{ form.filename.data }}</td>
+		</tr>
+		<tr>
+			<th>Text Source</th>
+			<td>
+				{{ form.columns.data }}
+			</td>
+		</tr>
+		<tr class="background">
+			<th>Other Configuration</th>
+			<td></td>
+		</tr>
+		<tr>
+			<th>Algorithm</th>
+			<td>{{ form.algorithm.data }}</td>
+		</tr>
+		<tr>
+			<th>Desired Topics</th>
+			<td>{{ form.topics.data }}</td>
+		</tr>
+		<tr>
+			<th>Max Phrase Length</th>
+			<td>{{ form.length.data }}</td>
+		</tr>
+		<tr>
+			<th>Stop Words</th>
+			<td>{{ form.stopwords.data }}</td>
+		</tr>
+	</table>
+	<form method="post" class="center">
+		{{ form.csrf_token }}
+		{{ form.columns(class='placeholder') }}
+		{{ form.algorithm(class='placeholder') }}
+		{{ form.topics(class='placeholder') }}
+		{{ form.length(class='placeholder') }}
+		{{ form.stopwords(class='placeholder') }}
+		<input class="submit" type="submit" value="Analyze">
+	</form>
+</div>
+
+{% endblock %}

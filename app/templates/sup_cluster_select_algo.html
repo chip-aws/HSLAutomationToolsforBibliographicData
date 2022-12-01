@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/algorithm.css')}}">
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/button_nav.css')}}">
+{% endblock %}
+
+{% block content %}
+{% from "_formhelpers.html" import render_field %}
+<div class="tabs">
+   <form action="/back_index" method="post">
+      <button class="not-chosen clickable">Select an Input File</button>
+      <input type="text" name="filename" value="{{filename}}" class="placeholder">
+   </form>
+   <form action="/back_select" method="post">
+      <button class ="not-chosen clickable">Select Text</button>
+      <input type="text" name="filename" id="filename"  value="{{filename}}" class="placeholder">
+   </form>
+   <button class ="chosen clickable">Set Algorithm Configuration</button>
+   <button class ="not-chosen unclickable">Run Topic Extraction</button>
+</div>
+<div class="body">
+   {% if filename is defined %}
+   Filename is <b>{{ filename }}</b> <br>
+   {% endif %}
+   <form class="form" method="post">
+      {{ form.csrf_token }}
+      {{ form.columns(class="placeholder") }}
+      {{ form.seeds(class="placeholder") }}
+      <fieldset>
+         <legend class="legend">Set Algorithm Configuration</legend>
+         {{ render_field(form.threshold, class='answer') }}
+         <p class="hint">Values must be between 0.75 and 0.92. A safety margin of +0.05 is built into the model.</p>
+
+         {{ render_field(form.stopwords, class='textarea', rows="3") }}
+         <p class="hint">Words or phrases that will be ignored in the data. (Should be a comma-delimited list)</p>
+
+         {{ render_field(form.output_type, class='answer') }}
+         <p class="hint">"Enseble Only" is the recommended output type. Select "Verbose Output"
+            if you want to view intermediate values that are used to create the final prediction.</p>
+
+         <input class="submit" type="submit" value="Continue">
+      </fieldset>
+
+   </form>
+</div>
+{% endblock %}
+

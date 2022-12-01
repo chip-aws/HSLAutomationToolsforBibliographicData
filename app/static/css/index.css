@@ -1,0 +1,77 @@
+    .container .page-header h3 {
+       color: rgb(0, 179, 173);
+       font-size: 35px;
+    }
+    .tabs {
+       width: 90%;
+       border: 2px solid rgb(223, 223, 223);
+       padding: 50px;
+       margin: 31px 50px 0px 5%;
+       border-radius: 3px;
+       background-color: rgb(247, 247, 247);
+
+    }
+    .tabs button {
+       float: left;
+       border: none;
+       outline: none;
+       padding: 20px 16px;
+       width: 25%;
+       margin-top: -2.7%;
+       font-family: Trebuchet MS, sans-serif;
+       font-size: 20px;
+    }
+    .not-chosen {
+       background-color: rgb(247, 247, 247);
+    }
+    .chosen {
+       background-color: white;
+    }
+    .clickable {
+       color: rgb(0, 179, 173);
+    }
+    .unclickable {
+       cursor: auto;
+       color: grey;
+    }
+    .body {
+       width: 90%;
+       border: 2px solid grey;
+       padding: 20px;
+       margin: 0px 50px 20px 5%;
+       border-radius: 3px;
+    }
+    .body .container {
+       margin-left: -1.5%;
+       font-family: Noto Sans, sans-serif;
+       font-size: 15px;
+    }
+    .form-control-file {
+       margin-top: 2%;
+       margin-bottom: 1.5%;
+       outline-style: solid;
+       outline-width: thin;
+       outline-color: rgb(230, 230, 230);
+       outline-offset: 8px;
+       width: 105%;
+    }
+    .upload {
+       margin-top: 2%;
+       border: none;
+       background-color: rgb(13, 46, 191);
+       border-radius: 4px;
+       color: whitesmoke;
+       width: 85px;
+       height: 35px;
+       transition: 0.3s;
+    }
+    .upload:hover {
+       background-color: rgb(6, 28, 125);
+    }
+    .form-group label {
+       font-family: Noto Sans, sans-serif;
+       margin-top: 30px;
+    }
+    .placeholder {
+        display: none;
+    }

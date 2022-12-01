@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/ris_to_csv.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="body">
+   <h2>CSV to RIS online convert</h2>
+   <div class="container">
+      <form method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="file_upload">Upload a data file (in .csv format)</label>
+              {{ form.csrf_token }}
+              {{ form.file }}
+            <p style="color: red;">{{ ', '.join(form.file.errors) }}</p>
+            <input class="upload" type=submit value=Upload>
+         </div>
+      </form>
+   </div>
+</div>
+<p style="margin: 0px 50px 20px 5%;">Credit to <a href="https://hsl.lib.unc.edu/">@UNC Health Science Library</a></p>
+{% endblock %}
+
+

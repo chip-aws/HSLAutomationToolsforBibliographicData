@@ -1,0 +1,87 @@
+   .body {
+		width: 90%;
+		border: 2px solid grey;
+		padding: 20px;
+		margin: 0px 50px 20px 5%;
+		border-radius: 3px;
+	}
+    .tabs {
+		width: 90%;
+		border: 2px solid rgb(223, 223, 223);
+		padding: 50px;
+		margin: 0px 50px 0px 5%;
+		border-radius: 3px;
+		background-color: rgb(247, 247, 247);
+	}
+	.tabs button {
+		float: left;
+		border: none;
+  		outline: none;
+  		padding: 20px 16px;
+  		width: 25%;
+  		margin-top: -2.7%;
+  		font-family: Trebuchet MS, sans-serif;
+  		font-size: 20px;
+	}
+	.not-chosen {
+		background-color: rgb(247, 247, 247);
+	}
+	.chosen {
+		background-color: white;
+	}
+	.clickable {
+		color: rgb(0, 179, 173);
+	}
+	.unclickable {
+		cursor: auto;
+		color: grey;
+	}
+	.placeholder {
+		display: none;
+	}
+	.form {
+		margin-top: 0px;
+	}
+	.legend {
+		color: rgb(0, 179, 173);
+	}
+	.title {
+		font-size: 15px;
+		font-family: Noto Sans, sans-serif;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	.answer {
+		width: 95%;
+		height: 30px;
+		font-family: Georgia, serif;
+	}
+	select {
+		border-color: rgb(197, 203, 212);
+	}
+	.hint {
+		color: grey;
+		margin-top: 10px;
+		font-family: Noto Sans, sans-serif;
+	}
+	.textarea {
+		width: 95%;
+		font-family: Georgia, serif;
+	}
+	.submit {
+		margin-top: 2%;
+		border: none;
+		background-color: rgb(13, 46, 191);
+		border-radius: 4px;
+		color: whitesmoke;
+		width: 85px;
+		height: 35px;
+		transition: 0.3s;
+	}
+	.submit:hover {
+		background-color: rgb(6, 28, 125);
+	}
+
+	.background {
+   		background-color: rgb(0, 179, 173);
+   	}

@@ -1,0 +1,77 @@
+	.body {
+		width: 90%;
+		border: 2px solid grey;
+		padding: 20px;
+		margin: 0px 50px 20px 5%;
+		border-radius: 3px;
+	}
+    .tabs {
+		width: 90%;
+		border: 2px solid rgb(223, 223, 223);
+		padding: 50px;
+		margin: 0px 50px 0px 5%;
+		border-radius: 3px;
+		background-color: rgb(247, 247, 247);
+	}
+	.tabs button {
+		float: left;
+		border: none;
+  		outline: none;
+  		padding: 20px 16px;
+  		width: 25%;
+  		margin-top: -2.7%;
+  		font-family: Trebuchet MS, sans-serif;
+  		font-size: 20px;
+	}
+	.not-chosen {
+		background-color: rgb(247, 247, 247);
+	}
+	.chosen {
+		background-color: white;
+	}
+	.clickable {
+		color: rgb(0, 179, 173);
+	}
+	.unclickable {
+		cursor: auto;
+		color: grey;
+	}
+	.placeholder {
+		display: none;
+	}
+	table {
+   		width: 90%;
+   		margin: auto;
+   		/*border-collapse: collapse;*/
+   		margin-bottom: 20px;
+   		font-size: 15px;
+	}
+	td {
+    	text-align: left;
+    	padding-right: 80%;
+  	}
+   	th{
+     	padding: 15px;
+   	}
+   	.background {
+   		background-color: rgb(0, 179, 173);
+   	}
+   	tr {
+   		border-bottom: 2px solid rgb(197, 203, 212);
+   	}
+   	.submit {
+		margin-top: 2%;
+		border: none;
+		background-color: rgb(13, 46, 191);
+		border-radius: 4px;
+		color: whitesmoke;
+		width: 85px;
+		height: 35px;
+		transition: 0.3s;
+	}
+	.submit:hover {
+		background-color: rgb(6, 28, 125);
+	}
+	.center {
+		text-align: center;
+	}

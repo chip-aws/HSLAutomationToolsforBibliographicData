@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/main.css')}}">
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/button_nav.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="tabs">
+	<form action="/cluster_select_file" method="post">
+		<button class="not-chosen clickable">Select an Input File</button>
+		<input type="text" name="filename" value={{filename}} class="placeholder">
+	</form>
+	<button class ="chosen clickable">Select Text</button>
+	<button class ="not-chosen unclickable">Set Algorithm Configuration</button>
+	<button class ="not-chosen unclickable">Run Topic Extraction</button>
+</div>
+<div class="body">
+	{% if filename is defined %}
+	<div align="center" style="overflow-x: scroll; max-height: 500px; overflow-y: scroll;">
+		  <table id="data" class="table table-striped" style="table-layout:automatic">
+			<thead>
+			  <tr>
+				<! -- define head -->
+				{% for head in heading%}
+					<th>{{head}}</th>
+				{% endfor %}
+			  </tr>
+			</thead>
+			<tbody>
+			  {% for row in array %}
+				<tr>
+				  {% for cell in row %}
+				  <td>{{ row[cell] }}</td>
+				  {% endfor %}
+				</tr>
+			  {% endfor %}
+			</tbody>
+		  </table>
+		</div>
+	<p class="showing">Showing 5 of {{length}} rows</p>
+
+	<div class="container">
+		<form method="post" id="selecting" onsubmit="return validateForm();">
+			<h4><b>Select column(s):</b></h4>
+			{{ form.csrf_token }}
+			<div class="form">
+				{% for choice in form.check_options %}
+                        {{ choice(class="labels") }}
+                        {{ choice.label }}
+                {% endfor %}
+			</div>
+
+			<div class="form-group">
+				<label for="filename">File name: </label>
+				{% if filename is defined %}
+	   			 <b>{{ filename }}</b> <br>
+				{% endif %}
+				<input type="text" name="filename"  id="filename"  value={{filename}} readonly placeholder={{filename}} class="placeholder">
+				<p style="color: red;">{{warning}}</p>
+				<input class="analyze" type=submit value=Continue>
+		    </div>
+
+
+			<script>
+			function validateForm(){
+			    var checked_len = $("#selecting input:checked").length;
+				if (checked_len == 0){
+					alert("Please check at least one checkbox");
+					return false;
+				}else {
+				    return true;
+				}
+			}
+			</script>
+		</form>
+	</div>
+</div>
+    {% endif %}
+{% endblock %}
