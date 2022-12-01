@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/algorithm.css')}}">
+<link rel="stylesheet" type="text/css"  href="{{url_for('static', filename='css/button_nav.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="tabs">
+	<form action="/back_index" method="post">
+		<button class="not-chosen clickable">Select an Input File</button>
+		<input type="text" name="filename" value="{{filename}}" class="placeholder">
+	</form>
+	<form action="/back_select" method="post">
+		<button class ="not-chosen clickable">Select Text</button>
+		<input type="text" name="filename" id="filename"  value="{{filename}}" class="placeholder">
+	</form>
+	<button class ="chosen clickable">Set Algorithm Configuration</button>
+	<button class ="not-chosen unclickable">Run Topic Extraction</button>
+</div>
+<div class="body">
+	{% if filename is defined %}
+	Filename is <b>{{ filename }}</b> <br>
+	{% endif %}
+	<form class="form" action="/review" method="post">
+		<fieldset>
+			<legend class="legend">Set Algorithm Configuration</legend>
+
+			<input type="text" name="file" id="file" value="{{filename}}" class="placeholder">
+			<input type="text" name="text" id="text" value="{{text}}" class="placeholder">
+			<input type="text" name="time" id="time" value="{{time}}" class="placeholder">
+
+			<label for="algorithm" class="title">* Clustering Algorithm:</label><br>
+			<select id="algorithm" name="algorithm" value="kMean" class="answer" required>
+				<option value="kMean">kMean</option>
+			</select>
+			<label for="topics" class="title">* Desired Number of Topics:</label>
+			<input type="number" id="topics" name="topics" class="answer" min="10" max="20" value="10" required>
+
+			<p class="hint">How many topic-clusters would you like to identify from your data? (Can't be greater than the total number of documents)</p>
+
+
+			<label for="length" class="title">* Maximum Phrase Length:</label>
+  			<input type="number" id="length" name="length" class="answer" min="1" max="3" value="1" required>
+
+			<p class="hint">Maximum number of words considered when determining significant phrases.</p>
+
+			<label for="stopwords" class="title">Stopwords:</label>
+			<textarea id="stopwords" name="stopwords" class="textarea" rows="3"></textarea>
+
+			<p class="hint">Words or phrases that will be ignored in the data. (Should be a comma-delimited list)</p>
+
+			<input class="submit" type="submit" value="Continue">
+		</fieldset>
+	</form>
+</div>
+{% endblock %}
