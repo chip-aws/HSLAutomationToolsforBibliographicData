@@ -40,6 +40,18 @@ def index():
                            known=session.get('known', False),
                            current_time=datetime.utcnow())
 
+@main.route('/about', methods=['GET', 'POST'])
+def about():
+    form = NameForm()
+    if form.validate_on_submit():
+        # ...
+        return redirect(url_for('.about'))
+    return render_template('about.html',
+                           form=form, name=session.get('name'),
+                           known=session.get('known', False),
+                           current_time=datetime.utcnow())
+
+
 
 # 1-------------------------Unsupervised Clustering-------------------------
 # step 1: select an input file
