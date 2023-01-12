@@ -53,51 +53,54 @@ Folder Structure Conventions
    |
    |-- app/
    |    |
-   |    | -- config.py                     # App Configuration
-   |    | -- models.py                     # Database Tables 
-   |    | -- forms.py                      # App Forms: login, registration
-   |    | -- util.py                       # Helpers to manipulate date, files  
-   |    | -- views.py                      # App Routing
-   |    | -- __init__.py                   # Bundle all above sections and expose the Flask APP 
-   |    |
+   |    |-- main/
+   |    |    |-- __init__.py               # Bundle all above sections and expose the Flask APP 
+   |    |    |-- errors.py                 #     
+   |    |    |-- forms.py                  # App Forms: login, registration
+   |    |    |-- views.py                  # App Routing
+   |    |   
    |    |-- static/
    |    |    |-- <css, JS, images>         # CSS files, Javascripts files
+   |    |    |-- favicon.ico               # project icon
    |    |
    |    |-- templates/
    |    |    |
-   |    |    |-- includes/                 # Page chunks, components
-   |    |    |    |
-   |    |    |    |-- navigation.html      # Top bar
-   |    |    |    |-- sidebar.html         # Left sidebar
-   |    |    |    |-- scripts.html         # JS scripts common to all pages
-   |    |    |    |-- footer.html          # The common footer
-   |    |    |
-   |    |    |-- layouts/                  # App Layouts (the master pages)
-   |    |    |    |
-   |    |    |    |-- base.html            # Used by common pages like index, UI
-   |    |    |
-   |    |    |-- accounts/                 # Auth Pages (login, register)
-   |    |    |    |
-   |    |    |    |-- login.html           # Use layout `base-fullscreen.html`
-   |    |    |    |-- register.html        # Use layout `base-fullscreen.html`  
-   |    |    |
-   |    |  index.html                      # The default page
-   |    |  page-404.html                   # Error 404 page (page not found)
-   |    |  page-500.html                   # Error 500 page (server error)
-   |    |    *.html                        # All other pages provided by the UI Kit
+   |    |    |--index.html                      # The default page
+   |    |    |--page-403.html                   # Error 403 page (refuses to authorize it)  
+   |    |    |--page-404.html                   # Error 404 page (page not found)
+   |    |    |--page-500.html                   # Error 500 page (server error)
+   |    |    |--stopwords.txt                   # stopwords collection
+   |    |    |--*.html                          # All other pages provided by the UI Kit
+   |    |   
+   |    |-- __init__.py                    # Bundle all above sections and expose the Flask APP
+   |    |-- ml.py                          # machine learning core algorithm file, including k-mean, NMF, asemble algo...
+   |    |-- ris.py                         # ris -> CSV and CSV -> ris algorithm
+   |    |-- email.py                       # email config file
+   |    |-- models.py                      # converting a post to a JSON serializable dictionary
+   |    |   
+   |-- migrations/                         # contains the database migration scripts  
+   |    |   
+   |-- requirements/  
+   |    |-- docker.txt                     # Docker Env Dependencies, under Python 3.8 version
+   |    |-- requirements.txt               # Server Application Dependencies(Not Docker Env)
+   |    |   
+   |-- results/                            # Application running results files for download link, like csv and ris files
+   |-- tests/                              # Unit tests are written in a tests package, for further improvement, don't use it currently
+   |-- uploads/                            # save all uploaded pre-analysing files, like csv, ris...
    |
-   |-- requirements.txt                    # Application Dependencies
+   |-- Dockerfile.txt                      # Docker can build images automatically by reading the instructions from a Dockerfile
+   |-- flask.py                            # defines the Flask application instance, tasks that help manage the application
+   |-- run_flask.sh                        # Docker Container startup script
    |
-   |-- run.py                              # Start the app in development and production
-   |
-   |-- ************************************************************************
+   |-- ************************************************************************   
+  
 ```
 
 <br />
 
 > Relevant Files and folders
 
-- `run.py` - is the entry point called to start the app
+- `run_flask.sh` - is the entry point called to start the app
 - `app/__init__.py` - bundle all app sections: configuration, forms, database connection
 - App modules: `views` (routing), `config`, `forms`, `util`
 - App static assets and template folders:
@@ -106,11 +109,7 @@ Folder Structure Conventions
 
 <br />
 
-> To visualize samples app that uses this structure please visit the [Sample Apps](#sample-apps) section.
 
-<br />
-
-<p align="right"><a href="#topics"> :point_up_2: Return to top</a></p>
 
 <br />
 
