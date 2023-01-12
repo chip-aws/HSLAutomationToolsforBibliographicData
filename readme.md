@@ -101,6 +101,7 @@ Folder Structure Conventions
    |-- results/                              # Application running results files for download link, like csv and ris files
    |-- tests/                                # Unit tests are written in a tests package, for further improvement, don't use it currently
    |-- uploads/                              # Save all uploaded pre-analysing files, like csv, ris...
+   |-- jupyter/                              # Jupyter testing script   
    |
    |-- Dockerfile.txt                        # Docker can build images automatically by reading the instructions from a Dockerfile
    |-- flask.py                              # Defines the Flask application instance, tasks that help manage the application
