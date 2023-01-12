@@ -115,13 +115,14 @@ def ml_cluster(df, form, stopwords_list):
     for i in range(k):
         subset_df = df[df.Cluster == i].shape[0]
         top_ten_words = [terms[ind] for ind in order_centroids[i, :10]]
-        data = {'Cluster Number': i,
+        # change init Cluster number from 0 to 1:
+        data = {'Cluster Number': i+1,      # i -> i+1
                 'Number of Items': subset_df,
                 'Top Cluster Terms': top_ten_words}
         # use concat instead of append
         # df2 = df2.append(data, ignore_index=True)
         df2 = pd.concat([df2, pd.DataFrame([data])], axis=0, ignore_index=True)
-
+    print(data)
     df2.head()
     return df2
 
