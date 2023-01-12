@@ -54,22 +54,21 @@ Folder Structure Conventions
    |-- app/
    |    |
    |    |-- main/
-   |    |    |-- __init__.py               # Blueprint init file
-   |    |    |-- errors.py                 # Error handlers in main blueprint    
-   |    |    |-- forms.py                  # App Forms: login, registration
-   |    |    |-- views.py                  # App Routing
+   |    |    |-- __init__.py                 # Blueprint init file
+   |    |    |-- errors.py                   # Error handlers in main blueprint    
+   |    |    |-- forms.py                    # App Forms: login, registration
+   |    |    |-- views.py                    # App Routing
    |    |   
    |    |-- static/
-   |    |    |-- <css, JS, images>         # CSS files, Javascripts files
-   |    |    |-- favicon.ico               # project icon
+   |    |    |-- <css, JS, images>           # CSS files, Javascripts files
+   |    |    |-- favicon.ico                 # Project icon
    |    |
    |    |-- templates/
-   |    |    |
    |    |    |--index.html                   # The default page
    |    |    |--page-403.html                # Error 403 page (refuses to authorize it)  
    |    |    |--page-404.html                # Error 404 page (page not found)
    |    |    |--page-500.html                # Error 500 page (server error)
-   |    |    |--stopwords.txt                # stopwords collection
+   |    |    |--stopwords.txt                # Stopwords collection
    |    |    |--about.html                   # Project about information
    |    |    |--base.html                    # Defines several other blocks that can be used in derived templates
    |    |    |--cluster_select_file.html     # Unsupervised Clustering step 1: select an input file
@@ -87,25 +86,25 @@ Folder Structure Conventions
    |    |    |--sup_cluster_preview.html     # Supervised Clustering step 4: preview   
    |    |    |--sup_cluster_result.html      # Supervised Clustering step 5: generate the analysed result    
    |    |   
-   |    |-- __init__.py                    # Bundle all above sections and expose the Flask APP
-   |    |-- ml.py                          # machine learning core algorithm file, including k-mean, NMF, asemble algo...
-   |    |-- ris.py                         # ris -> CSV and CSV -> ris algorithm
-   |    |-- email.py                       # email config file
-   |    |-- models.py                      # converting a post to a JSON serializable dictionary
+   |    |-- __init__.py                      # Bundle all above sections and expose the Flask APP
+   |    |-- ml.py                            # Machine learning core algorithm file, including k-mean, NMF, asemble algo...
+   |    |-- ris.py                           # Ris -> CSV and CSV -> ris algorithm
+   |    |-- email.py                         # Email config file
+   |    |-- models.py                        # Converting a post to a JSON serializable dictionary
    |    |   
-   |-- migrations/                         # contains the database migration scripts  
+   |-- migrations/                           # Contains the database migration scripts  
    |    |   
    |-- requirements/  
-   |    |-- docker.txt                     # Docker Env Dependencies, under Python 3.8 version
-   |    |-- requirements.txt               # Server Application Dependencies(Not Docker Env)
+   |    |-- docker.txt                       # Docker Env Dependencies, under Python 3.8 version
+   |    |-- requirements.txt                 # Server Application Dependencies(Not Docker Env)
    |    |   
-   |-- results/                            # Application running results files for download link, like csv and ris files
-   |-- tests/                              # Unit tests are written in a tests package, for further improvement, don't use it currently
-   |-- uploads/                            # save all uploaded pre-analysing files, like csv, ris...
+   |-- results/                              # Application running results files for download link, like csv and ris files
+   |-- tests/                                # Unit tests are written in a tests package, for further improvement, don't use it currently
+   |-- uploads/                              # Save all uploaded pre-analysing files, like csv, ris...
    |
-   |-- Dockerfile.txt                      # Docker can build images automatically by reading the instructions from a Dockerfile
-   |-- flask.py                            # defines the Flask application instance, tasks that help manage the application
-   |-- run_flask.sh                        # Docker Container startup script
+   |-- Dockerfile.txt                        # Docker can build images automatically by reading the instructions from a Dockerfile
+   |-- flask.py                              # Defines the Flask application instance, tasks that help manage the application
+   |-- run_flask.sh                          # Docker Container startup script
    |
    |-- ************************************************************************   
   
