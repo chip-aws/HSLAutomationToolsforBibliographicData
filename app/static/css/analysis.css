@@ -40,6 +40,7 @@ h1, h2 {
    	.review td {
     	text-align: center;
     	padding-right: 40%;
+    	white-space: nowrap;
   	}
   	.review th{
      	padding: 15px;
@@ -73,4 +74,8 @@ h1, h2 {
 	   overflow: hidden;
 	   text-overflow: ellipsis;
 	   white-space: nowrap;
+	}
+	.topic_tbl {
+	    margin-left: 5%;
+	    width: 110%;
 	}
