@@ -30,8 +30,12 @@ def ris2csv(file):
     # my_file = open(os.path.join(Config.UPLOAD_FOLDER, "UNC_COVID19_Research_May-2021.ris"), 'r')
     # entries = rispy.load(my_file, mapping=mapping)
 
+    """
     with open(os.path.join(Config.UPLOAD_FOLDER, file), 'r') as bibliography_file:
         entries = rispy.load(bibliography_file, mapping=mapping)
+    """
+    with open(os.path.join(Config.UPLOAD_FOLDER, file), 'r') as bibliography_file:
+        entries = rispy.load(bibliography_file, mapping=mapping, encoding='utf-8-sig')
     # read in RIS . output is a python dict.
 
     # initialize lists to hold properties
@@ -111,7 +115,7 @@ def ris2csv(file):
         ST.append(st_t)
         UR.append(ur_t)
         VL.append(vl_t)
-
+    
     df = pd.DataFrame({'ID': ID,
                        'TI': TI,
                        'T2': T2,
