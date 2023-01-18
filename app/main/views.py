@@ -219,9 +219,34 @@ def ris_to_csv_preview(filename):
     df = ris.ris2csv(filename)
     # df = url_for('api.convert_ris_pd_df', file=filename)
 
+    # try to output Excel file instead of CSV because some field, like AU, AB maybe exceed CSV cell limitation
+    """
     output_file_name = filename.replace('.ris', '') + '.csv'
     output_full_path_file = os.path.join(Config.DOWNLOAD_FOLDER, output_file_name)
-    df.to_csv(output_full_path_file, index=False)
+    # df.to_csv(output_full_path_file, index=False)   # for non utf-8 encoding will occure bug
+    df.to_csv(output_full_path_file, index=False, encoding='utf-8-sig')
+    """
+    # Auto-adjust columns' width
+    # writer = pd.ExcelWriter(filename, engine='xlsxwriter')
+    output_file_name = filename.replace('.ris', '')  + '.xlsx'
+    output_file_full_path = os.path.join(Config.DOWNLOAD_FOLDER, output_file_name)
+    writer = pd.ExcelWriter(output_file_full_path, engine='xlsxwriter')
+    # Given a dict of dataframes
+
+    dfs = {filename.replace('.ris', ''): df}
+
+    for sheetname, df in dfs.items():  # loop through `dict` of dataframes
+        df.to_excel(writer, sheet_name=sheetname, index=False, encoding='utf-8-sig')  # send df to writer
+        worksheet = writer.sheets[sheetname]  # pull worksheet object
+        for idx, col in enumerate(df):  # loop through all columns
+            series = df[col]
+            max_len = max((
+                # len of the largest item of Seeds
+                20 if series.astype(str).map(len).max() > 20 else series.astype(str).map(len).max(),
+                len(str(series.name))  # len of column name/header
+            )) + 1  # adding a little extra space
+            worksheet.set_column(idx, idx, max_len)  # set column width
+    writer.save()
 
     # add transfer parameter: length heading, array
     total_length = len(df)
