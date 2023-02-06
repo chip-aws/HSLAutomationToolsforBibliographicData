@@ -136,7 +136,10 @@ def sup_cluster(df, form, stopwords_list):
     rtype: dataframe
     """
     file = form.filename.data
+    AN = form.AN.data
     text = form.columns.data
+    seeds = form.seeds.data
+
     # algorithm = form.algorithm.data
     stopwords = form.stopwords.data
     threshold = form.threshold.data
@@ -178,7 +181,9 @@ def sup_cluster(df, form, stopwords_list):
 
     # >>>>>>>>>>>> use DF: df_filter_seeds  output 'Filtered for Seeds only' sheet
     # 'Filtered for Seeds only': step 1: select AN column
-    df_filter_seeds = df.loc[df['Seed'] == '1', ['AN']]
+    # fix bug: for flexible AN col, Feb 5, 2023
+    # df_filter_seeds = df.loc[df['Seed'] == '1', ['AN']]
+    df_filter_seeds = df.loc[df[seeds] == '1', [AN]]
     for algo in algo_dict:
         k_list = algo_dict[algo]
         # >>>>>>>>>>>> output 'Supervised Clustering' sheet -- Kmeans_10, Kmeans_20,
@@ -204,7 +209,8 @@ def sup_cluster(df, form, stopwords_list):
 
             # 'Filtered for Seeds only':  step 2: concat seeds = 1 to sheet 'Filtered for Seeds only'
             # df_filter_seeds = df.loc[df['Seed'] == '1', ['Kmeans_10', 'Kmeans_20', 'Kmeans_30'], ['NMF_10', 'NMF_20', 'NMF_30']]
-            df_kmean = df.loc[df['Seed'] == '1', [algo + str(k)]]
+            # df_kmean = df.loc[df['Seed'] == '1', [algo + str(k)]]
+            df_kmean = df.loc[df[seeds] == '1', [algo + str(k)]]
             df_filter_seeds = pd.concat([df_filter_seeds, df_kmean], axis=1)
 
             # >>>>>>>>>>>> output 'Pivot Tables' sheet --
@@ -252,7 +258,7 @@ def sup_cluster(df, form, stopwords_list):
                 # row_data['Cluster (all models)'] += '' if row_data.get('Cluster (all models)') == '' else ',' + clus_no
 
             # 'Seed Capture': step2: Seed Capture by model (unique seeds only)
-            df_AN = df_filter_seeds.loc[df_filter_seeds.iloc[:, 1 + j] == clus_no, ['AN']]
+            df_AN = df_filter_seeds.loc[df_filter_seeds.iloc[:, 1 + j] == clus_no, [AN]]
             # cal unique by drop duplicated AN rows
             df_unique = pd.concat([df_unique, df_AN]).drop_duplicates().reset_index(drop=True)
 
