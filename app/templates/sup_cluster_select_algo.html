@@ -26,6 +26,7 @@
    {% endif %}
    <form class="form" method="post">
       {{ form.csrf_token }}
+      {{ form.AN(class="placeholder") }}
       {{ form.columns(class="placeholder") }}
       {{ form.seeds(class="placeholder") }}
       <fieldset>

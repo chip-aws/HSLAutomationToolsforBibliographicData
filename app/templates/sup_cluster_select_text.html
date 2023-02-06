@@ -46,13 +46,17 @@
 		<form method="post" id="selecting" onsubmit="return validateForm();">
 			<h4><b>Select column(s):</b></h4>
 			{{ form.csrf_token }}
+			<div class="form-group">
+				{{ render_field(form.AN, class='answer') }}
+			</div>
 			<div class="form">
+				<span style="color: firebrick;">*</span><label for="textLocation">Text Location:</label><br>
 				{% for choice in form.check_options %}
                         {{ choice(class="labels") }}
                         {{ choice.label }}
                 {% endfor %}
 			</div>
-			<div class="form">
+			<div class="form-group">
 				{{ render_field(form.seeds, class='answer') }}
 			</div>
 			<div class="form-group">
@@ -64,6 +68,7 @@
 				<p style="color: red;">{{warning}}</p>
 				<input class="analyze" type=submit value=Continue>
 		    </div>
+
 
 
 			<script>

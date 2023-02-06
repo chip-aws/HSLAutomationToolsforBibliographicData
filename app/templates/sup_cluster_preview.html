@@ -33,6 +33,12 @@
 			<td>{{ form.filename.data }}</td>
 		</tr>
 		<tr>
+			<th>AN Source</th>
+			<td>
+				{{ form.AN.data }}
+			</td>
+		</tr>
+		<tr>
 			<th>Text Source</th>
 			<td>
 				{{ form.columns.data }}
@@ -64,6 +70,7 @@
 	</table>
 	<form method="post" class="center">
 		{{ form.csrf_token }}
+		{{ form.AN(class='placeholder') }}
 		{{ form.columns(class='placeholder') }}
 		{{ form.seeds(class='placeholder') }}
 		{{ form.threshold(class='placeholder') }}
