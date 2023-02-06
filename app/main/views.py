@@ -79,7 +79,13 @@ def cluster_select_text(filename):
         if filename.endswith('ris'):
             df = ris.ris2csv(upload_full_path_file)
         elif filename.endswith('csv'):
-            df = pd.read_csv(upload_full_path_file, keep_default_na=False)
+            # fix bug caused by encoded error, Feb 5,2023
+            # df = pd.read_csv(upload_full_path_file, keep_default_na=False)
+            df = pd.read_csv(upload_full_path_file,
+                             encoding = "utf-8",
+                             encoding_errors ='ignore',
+                             engine = 'python',
+                             keep_default_na = False)
         else:
             return redirect(url_for('.cluster_select_file'))
     else:
@@ -92,31 +98,48 @@ def cluster_select_text(filename):
     # get first 5 rows of records
     array = df.head(5).to_dict(orient='records')
 
-    this_form = ClusterTextForm()
-    # initial checkbox choices
-    this_form.check_options.choices = heading
+    form = ClusterTextForm()
+    form.check_options.choices = heading
+    if request.method == 'GET':
+        formdata = session.get('formdata', None)  # formdate is dictionary
+        if formdata:
+            form.filename.data = filename
+            # this_form.columns.data = formdata["columns"]
+            # initial checkbox choices
+            form.check_options.choices = heading
 
-    if this_form.validate_on_submit():
+    if form.validate_on_submit():
         # transfer checkbox options
-        columns = this_form.check_options.data  # return list
-        columns = ','.join(map(str, columns))  # convert list to string
-        return redirect(url_for('.cluster_select_algo', filename=filename, columns=columns))
+        # columns = form.check_options.data  # return list
+        # columns = ','.join(map(str, columns))  # convert list to string
+        # return redirect(url_for('.cluster_select_algo', filename=filename, columns=columns))
+        session['formdata'] = request.form
+        return redirect(url_for('.cluster_select_algo', filename=filename))
 
-    return render_template('cluster_select_text.html', form=this_form, filename=filename,
+    return render_template('cluster_select_text.html', form=form, filename=filename,
                            length=total_length, heading=heading, array=array)
 
 
 # step 3: select algo
-@main.route('/cluster_select_algo/<filename>/<columns>', methods=['GET', 'POST'])
-def cluster_select_algo(filename, columns):
-    this_form = ClusterAlgoForm()
-    this_form.columns.data = columns
+# fix bug: if columns includes /, it will cause parase error
+# @main.route('/cluster_select_algo/<filename>/<columns>', methods=['GET', 'POST'])
+@main.route('/cluster_select_algo/<filename>', methods=['GET', 'POST'])
+def cluster_select_algo(filename):
+    # this_form = ClusterAlgoForm()
+    # this_form.columns.data = columns
+    form = ClusterAlgoForm()
+    if request.method == 'GET':
+        formdata = session.get('formdata', None)  # formdate is dictionary
+        # bug: select cols will lose /
+        if formdata:
+            form.filename.data = filename
+            form.columns.data = formdata["check_options"]
 
-    if this_form.validate_on_submit():
+    if form.validate_on_submit():
         session['formdata'] = request.form
         return redirect(url_for('.cluster_preview', filename=filename))
 
-    return render_template('cluster_select_algo.html', form=this_form)
+    return render_template('cluster_select_algo.html', form=form)
 
 
 # step 4: preview input parameters before running unsupervised clustering algorithm
@@ -133,10 +156,6 @@ def cluster_preview(filename):
             form.topics.data = formdata["topics"]
             form.length.data = formdata["length"]
             form.stopwords.data = formdata["stopwords"]
-            # form = ClusterPreForm(MultiDict(formdata))
-            # form.validate()
-            # session.pop('formdata')
-            # return render_template('cluster_preview.html', form=form)
     if form.validate_on_submit():
         session['formdata'] = request.form
         return redirect(url_for('.cluster_result', filename=filename))
@@ -295,7 +314,7 @@ def csv_to_ris():
     return render_template('csv_to_ris_file_upload.html', form=this_form)
 
 
-# ris to CSV preview page
+# csv to ris preview page
 @main.route('/csv_to_ris_preview/<filename>', methods=['GET', 'POST'])
 def csv_to_ris_preview(filename):
     # this_form = RisForm()
@@ -365,6 +384,7 @@ def sup_cluster_select_text(filename):
     array = sup_cluster_df.head(5).to_dict(orient='records')
 
     this_form = SupClusterTextForm()
+    this_form.AN.choices = heading    # add AN col as unique key
     # initial checkbox choices
     this_form.check_options.choices = heading
     this_form.seeds.choices = heading
@@ -373,17 +393,19 @@ def sup_cluster_select_text(filename):
         # transfer checkbox options
         columns = this_form.check_options.data  # return list
         columns = ','.join(map(str, columns))  # convert list to string
+        AN = str(this_form.AN.data)
         seeds = str(this_form.seeds.data)
-        return redirect(url_for('.sup_cluster_select_algo', filename=filename, columns=columns, seeds=seeds))
+        return redirect(url_for('.sup_cluster_select_algo', filename=filename, AN=AN, columns=columns, seeds=seeds))
 
     return render_template('sup_cluster_select_text.html', form=this_form, filename=filename,
                            length=total_length, heading=heading, array=array)
 
 
 # step 3: select algo
-@main.route('/sup_cluster_select_algo/<filename>/<columns>/<seeds>', methods=['GET', 'POST'])
-def sup_cluster_select_algo(filename, columns, seeds):
+@main.route('/sup_cluster_select_algo/<filename>/<AN>/<columns>/<seeds>', methods=['GET', 'POST'])
+def sup_cluster_select_algo(filename, AN, columns, seeds):
     this_form = SupClusterAlgoForm()
+    this_form.AN.data = AN
     this_form.columns.data = columns
     this_form.seeds.data = seeds
 
@@ -403,6 +425,7 @@ def sup_cluster_preview(filename):
         formdata = session.get('formdata', None)  # formdate is dictionary
         if formdata:
             form.filename.data = filename
+            form.AN.data = formdata["AN"]
             form.columns.data = formdata["columns"]
             form.seeds.data = formdata["seeds"]
             # form.algorithm.data = formdata["algorithm"]
@@ -440,6 +463,7 @@ def sup_cluster_result(filename):
         formdata = session.get('formdata', None)  # formdate is dictionary
         if formdata:
             form.filename.data = filename
+            form.AN.data = formdata["AN"]
             form.columns.data = formdata["columns"]
             form.seeds.data = formdata["seeds"]
             # form.algorithm.data = formdata["algorithm"]

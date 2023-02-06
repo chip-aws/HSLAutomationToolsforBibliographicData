@@ -51,11 +51,13 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class ClusterTextForm(FlaskForm):
+    filename = StringField()
     check_options = MultiCheckboxField()
     submit = SubmitField("Submit")
 
 
 class ClusterAlgoForm(FlaskForm):
+    filename = StringField()
     columns = StringField()
     label_for_algorithm = Markup('<span style="color: firebrick;">*</span> Clustering Algorithm:')
     algorithm = SelectField(label_for_algorithm,
@@ -109,7 +111,16 @@ class UploadSupClusterForm(FlaskForm):
 
 
 class SupClusterTextForm(FlaskForm):
+    # add AN col as unique key
+    label_for_AN = Markup('<span style="color: firebrick;">*</span> AN Location::')
+    AN = SelectField(label_for_AN,
+                       choices=[],
+                       validate_choice=False)
+    # text location
+    #label_for_text = Markup('<span style="color: firebrick;">*</span> Text Location::')
     check_options = MultiCheckboxField()
+
+    # seeds location
     label_for_seeds = Markup('<span style="color: firebrick;">*</span> Seed Location::')
     seeds = SelectField(label_for_seeds,
                        choices=[],
@@ -118,6 +129,7 @@ class SupClusterTextForm(FlaskForm):
 
 
 class SupClusterAlgoForm(FlaskForm):
+    AN = StringField()
     columns = StringField()
     seeds = StringField()
 
@@ -142,6 +154,7 @@ class SupClusterAlgoForm(FlaskForm):
 
 class SupClusterPreForm(FlaskForm):
     filename = StringField()
+    AN = StringField()
     columns = StringField()
     seeds = StringField()
     algorithm = StringField()
@@ -153,6 +166,7 @@ class SupClusterPreForm(FlaskForm):
 
 class SupClusterResultForm(FlaskForm):
     filename = StringField()
+    AN = StringField()
     columns = StringField()
     seeds = StringField()
     # algorithm = StringField()
