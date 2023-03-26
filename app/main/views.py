@@ -340,7 +340,7 @@ def csv_to_ris_preview(filename):
         flash('Your file has been downloaded.')
         return redirect(url_for('.download_file', filename=output_file_name))
 
-    return render_template('ris_to_csv_preview.html', form=form, filename=filename,
+    return render_template('csv_to_ris_preview.html', form=form, filename=filename,
                            length=total_length, heading=heading, array=array)
 
 
