@@ -324,7 +324,12 @@ def csv_to_ris_preview(filename):
     output_file_name = filename.replace('.csv', '') + '.ris'
     output_full_path_file = os.path.join(Config.DOWNLOAD_FOLDER, output_file_name)
 
-    df = pd.read_csv(upload_full_path_file, keep_default_na=False)
+    # df = pd.read_csv(upload_full_path_file, keep_default_na=False)
+    df = pd.read_csv(upload_full_path_file,
+                                 encoding="utf-8",
+                                 encoding_errors='ignore',
+                                 engine='python',
+                                 keep_default_na=False)
     ris.csv2ris(df, output_full_path_file)
 
     # add transfer parameter: length heading, array
