@@ -370,7 +370,13 @@ def sup_cluster_select_text(filename):
         if filename.endswith('ris'):
             sup_cluster_df = ris.ris2csv(upload_full_path_file)
         elif filename.endswith('csv'):
-            sup_cluster_df = pd.read_csv(upload_full_path_file, keep_default_na=False)
+            # fix bug caused by encoded error of supervised cluster, Apr 18,2023
+            # sup_cluster_df = pd.read_csv(upload_full_path_file, keep_default_na=False)
+            sup_cluster_df = pd.read_csv(upload_full_path_file,
+                             encoding="utf-8",
+                             encoding_errors='ignore',
+                             engine='python',
+                             keep_default_na=False)
         else:
             return redirect(url_for('.sup_cluster_select_file'))
     else:
