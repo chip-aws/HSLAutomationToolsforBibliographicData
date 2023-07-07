@@ -168,7 +168,7 @@ def csv2ris(df, file):
                      "AB",
                      "AN",
                      "AU",
-                     "RN"
+                     "RN",
                      "C1",
                      "C2",
                      "C3",
@@ -193,7 +193,7 @@ def csv2ris(df, file):
         for index, row in df.iterrows():
             # loop over columns
             for col in col_order:
-                try:
+                if col in list(df):
                     if not isNaN(row[col]):  # if no blank nothing
                         if col == "AU":  # for author field, output multiple authors on distinct lines
                             alist = row[col].split(";")
@@ -202,10 +202,10 @@ def csv2ris(df, file):
                                 out_file.write(col + "  - " + str.strip(x))
                                 out_file.write("\n")
                         else:
-                            out_file.write(col + "  - " + row[col])
+                            # change int type to str for some fields, like AN, PY
+                            out_file.write(col + "  - " + str(row[col]))
                             out_file.write("\n")
-                except:
-                    pass
+
             out_file.write("ER  - \n")
             out_file.write("\n")
             out_file.write("\n")
