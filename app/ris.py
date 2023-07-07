@@ -205,7 +205,9 @@ def csv2ris(df, file):
                             # change int type to str for some fields, like AN, PY
                             out_file.write(col + "  - " + str(row[col]))
                             out_file.write("\n")
-
+                    else:
+                        out_file.write(col + "  - ")
+                        out_file.write("\n")
             out_file.write("ER  - \n")
             out_file.write("\n")
             out_file.write("\n")
