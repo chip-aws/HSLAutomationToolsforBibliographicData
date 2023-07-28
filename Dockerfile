@@ -21,8 +21,6 @@ COPY uploads uploads
 
 COPY flasky.py config.py boot.sh run_flask.sh ./
 
-RUN chmod -R g=u /home/flasky
-
 # runtime configuration
 EXPOSE 5000
 
