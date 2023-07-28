@@ -7,6 +7,9 @@ ENV FLASK_CONFIG docker
 # RUN adduser -D flasky
 # USER flasky
 
+RUN chmod -R g=u /home/flasky
+
+
 WORKDIR /home/flasky
 
 COPY requirements requirements
