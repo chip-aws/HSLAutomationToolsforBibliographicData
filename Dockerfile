@@ -30,6 +30,6 @@ EXPOSE 5000
 RUN chmod +x run_flask.sh
 RUN useradd flasky
 RUN chown -R flasky:flasky /home/flasky
-RUN chown -R flasky:flasky /home/flasky/uploads
+RUN chmod -R 777 /home/flasky/venv
 USER flasky
 ENTRYPOINT ["./run_flask.sh"]
