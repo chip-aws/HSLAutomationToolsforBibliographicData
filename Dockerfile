@@ -28,7 +28,8 @@ EXPOSE 5000
 # ENTRYPOINT ["./boot.sh"]
 #  change the permission of the bash file by chmod +x run_flask.sh before calling ENTRYPOINT
 RUN chmod +x run_flask.sh
-RUN useradd -m flasky
+RUN useradd flasky
 RUN chown -R flasky:flasky /home/flasky
+RUN chown -R flasky:flasky /home/flasky/uploads
 USER flasky
 ENTRYPOINT ["./run_flask.sh"]
