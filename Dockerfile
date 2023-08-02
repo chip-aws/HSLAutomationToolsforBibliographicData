@@ -5,6 +5,7 @@ ENV FLASK_APP flasky.py
 ENV FLASK_CONFIG docker
 
 RUN adduser flasky --home /home/flasky --group flasky
+RUN chown -R flasky:flasky /home/flasky
 USER flasky
 WORKDIR /home/flasky
 COPY requirements requirements
