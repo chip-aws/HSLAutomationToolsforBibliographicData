@@ -1,25 +1,25 @@
 # FROM python:3.10-alpine
 FROM python:3.8-slim
+USER root
 
 ENV FLASK_APP flasky.py
 ENV FLASK_CONFIG docker
 
-RUN adduser flasky --home ./home/flasky --group flasky
-RUN chown -R flasky:flasky ./home/flasky
-USER flasky
-WORKDIR ./home/flasky
-COPY requirements requirements
-RUN python -m venv venv
-RUN venv/bin/pip install -r requirements/requirements.txt
+RUN useradd -m flasky 
+RUN chown -R flasky:flasky /home/flasky
 
-COPY app app
-COPY migrations migrations
-COPY results results
-COPY tests tests
-COPY uploads uploads
-COPY flasky.py config.py boot.sh run_flask.sh ./
-USER root
-RUN chown -R flasky:flasky ./
+RUN mkdir -p /home/flasky/
+COPY requirements /home/flasky
+RUN python -m venv /home/flasky/venv
+RUN /home/flasky/venv/bin/pip install -r requirements/requirements.txt
+
+COPY app /home/flasky/app
+COPY migrations /home/flasky/migrations
+COPY results /home/flasky/results
+COPY tests /home/flasky/tests
+COPY uploads /home/flasky/uploads
+COPY flasky.py config.py boot.sh run_flask.sh /home/flasky
+RUN chown -R flasky:flasky /home/flasky
 USER flasky
 
 # runtime configuration
