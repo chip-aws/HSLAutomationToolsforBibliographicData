@@ -4,8 +4,8 @@ FROM python:3.8-slim
 ENV FLASK_APP flasky.py
 ENV FLASK_CONFIG docker
 
-# RUN adduser -D flasky
-# USER flasky
+RUN adduser flasky --home /home/flasky
+USER flasky
 
 WORKDIR /home/flasky
 
