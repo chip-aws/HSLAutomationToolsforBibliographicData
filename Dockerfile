@@ -29,6 +29,7 @@ EXPOSE 5000
 #  change the permission of the bash file by chmod +x run_flask.sh before calling ENTRYPOINT
 RUN chmod +x run_flask.sh
 RUN useradd flasky
+RUN usermod -u 1001380000 flasky
 RUN mkdir /home/flasky/nltk_data
 RUN chmod 777 /home/flasky/nltk_data
 USER flasky
