@@ -20,6 +20,8 @@ COPY tests tests
 COPY uploads uploads
 
 COPY flasky.py config.py boot.sh run_flask.sh ./
+RUN useradd -m flasky
+USER flasky
 # runtime configuration
 EXPOSE 5000
 
