@@ -4,10 +4,10 @@ FROM python:3.8-slim
 ENV FLASK_APP flasky.py
 ENV FLASK_CONFIG docker
 
-RUN adduser flasky --home /home/flasky --group flasky
-RUN chown -R flasky:flasky /home/flasky
+RUN adduser flasky --home ./home/flasky --group flasky
+RUN chown -R flasky:flasky ./home/flasky
 USER flasky
-WORKDIR /home/flasky
+WORKDIR ./home/flasky
 COPY requirements requirements
 RUN python -m venv venv
 RUN venv/bin/pip install -r requirements/requirements.txt
