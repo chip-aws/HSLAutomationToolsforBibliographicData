@@ -26,4 +26,4 @@ COPY flasky.py config.py boot.sh run_flask.sh ./
 # ENTRYPOINT ["./boot.sh"]
 #  change the permission of the bash file by chmod +x run_flask.sh before calling ENTRYPOINT
 RUN chmod +x run_flask.sh
-ENTRYPOINT ["./run_flask.sh"]
+# ENTRYPOINT ["./run_flask.sh"]
