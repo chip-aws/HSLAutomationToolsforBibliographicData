@@ -1,14 +1,29 @@
-# Use the latest centOS image
-# Note that here you can tag a specific version if you want by passing in FROM centos:7 for example
-FROM centos
-MAINTAINER ITS Middleware <middleware@unc.edu>
- 
-# These labels are used by OpenShift in order to display information inside the project
-LABEL io.k8s.description="Middleware simple application test" \
- io.k8s.display-name="Simple Hello World App" \
- io.openshift.expose-services="8080:http"
+# FROM python:3.10-alpine
+FROM python:3.8-slim
 
-USER 1001
-EXPOSE 8080
+ENV FLASK_APP flasky.py
+ENV FLASK_CONFIG docker
 
-ENTRYPOINT ["/bin/echo hello world"]
+# RUN adduser -D flasky
+# USER flasky
+
+WORKDIR /home/flasky
+
+COPY requirements requirements
+RUN python -m venv venv
+RUN venv/bin/pip install -r requirements/requirements.txt
+
+COPY app app
+COPY migrations migrations
+COPY results results
+COPY tests tests
+COPY uploads uploads
+
+COPY flasky.py config.py boot.sh run_flask.sh ./
+# runtime configuration
+EXPOSE 5000
+
+# ENTRYPOINT ["./boot.sh"]
+#  change the permission of the bash file by chmod +x run_flask.sh before calling ENTRYPOINT
+RUN chmod +x run_flask.sh
+ENTRYPOINT ["./run_flask.sh"]
