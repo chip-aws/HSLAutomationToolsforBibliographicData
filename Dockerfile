@@ -20,10 +20,6 @@ COPY tests tests
 COPY uploads uploads
 
 COPY flasky.py config.py boot.sh run_flask.sh ./
-# runtime configuration
-# EXPOSE 5000
 
-# ENTRYPOINT ["./boot.sh"]
-#  change the permission of the bash file by chmod +x run_flask.sh before calling ENTRYPOINT
 RUN chmod +x run_flask.sh
-# ENTRYPOINT ["./run_flask.sh"]
+
