@@ -22,4 +22,4 @@ COPY uploads uploads
 COPY flasky.py config.py boot.sh run_flask.sh ./
 
 RUN chmod +x run_flask.sh
-
+CMD ["/bin/bash", "-c", "sleep infinity"]
