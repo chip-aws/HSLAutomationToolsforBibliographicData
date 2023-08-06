@@ -1,8 +1,6 @@
 # FROM python:3.10-alpine
 FROM python:3.8-slim
 
-USER root
-
 ENV FLASK_APP flasky.py
 ENV FLASK_CONFIG docker
 
@@ -25,14 +23,7 @@ COPY flasky.py config.py boot.sh run_flask.sh ./
 # runtime configuration
 EXPOSE 5000
 
-RUN useradd flasky
-RUN usermod -u 1001380000 flasky
-RUN chown -R flasky:flasky /home/flasky
-
 # ENTRYPOINT ["./boot.sh"]
 #  change the permission of the bash file by chmod +x run_flask.sh before calling ENTRYPOINT
 RUN chmod +x run_flask.sh
-
-USER flasky
-
 ENTRYPOINT ["./run_flask.sh"]
