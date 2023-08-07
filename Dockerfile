@@ -23,12 +23,12 @@ COPY flasky.py config.py boot.sh run_flask.sh ./
 
 EXPOSE 8000
 
-RUN adduser root
+# RUN adduser root
 # RUN usermod -u 1001380000 flasky
 RUN chmod -R 775 /home/flasky
-RUN chown -R root:flasky /home/flasky
+RUN chown -R /home/flasky
 
-USER 1000
+# USER 1000
 # ENTRYPOINT ["./boot.sh"]
 #  change the permission of the bash file by chmod +x run_flask.sh before calling ENTRYPOINT
 RUN chmod +x run_flask.sh
