@@ -21,6 +21,8 @@ COPY uploads uploads
 
 COPY flasky.py config.py boot.sh run_flask.sh ./
 
+ENV NLTK_DATA=/home/flasky/results
+
 EXPOSE 8000
 
 # add folder permission
