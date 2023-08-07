@@ -65,7 +65,7 @@ def ml_cluster(df, form, stopwords_list):
 
     # combine stopwords with nltk lib
     stemmer = nltk.stem.SnowballStemmer('english')
-    nltk.download('stopwords')
+    # nltk.download('stopwords')
     # stopwords = set(nltk.corpus.stopwords.words('english'))
     stopwords += set(nltk.corpus.stopwords.words('english'))
 
@@ -171,7 +171,7 @@ def sup_cluster(df, form, stopwords_list):
     stopwords += stopwords_list
     # combine with nltk stopwords
     stemmer = nltk.stem.SnowballStemmer('english')
-    nltk.download('stopwords')
+    # nltk.download('stopwords')
     stopwords += set(nltk.corpus.stopwords.words('english'))
 
 
