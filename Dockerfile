@@ -21,6 +21,10 @@ COPY uploads uploads
 
 COPY flasky.py config.py boot.sh run_flask.sh ./
 
+ENV NLTK_DATA=/usr/local/nltk_data
+RUN [ "python", "-c", "import nltk; nltk.download('stopwords', download_dir='/usr/local/nltk_data')" ]
+
+
 EXPOSE 8000
 
 # add folder permission
