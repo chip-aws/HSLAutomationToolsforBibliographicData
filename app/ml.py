@@ -66,7 +66,7 @@ def ml_cluster(df, form, stopwords_list):
     # combine stopwords with nltk lib
     stemmer = nltk.stem.SnowballStemmer('english')
     # nltk.download('stopwords')
-    nltk.data.path.append(Config.DOWNLOAD_FOLDER)
+    # nltk.data.path.append(Config.DOWNLOAD_FOLDER)
     nltk.download('stopwords', download_dir=Config.DOWNLOAD_FOLDER)
     # stopwords = set(nltk.corpus.stopwords.words('english'))
     stopwords += set(nltk.corpus.stopwords.words('english'))
