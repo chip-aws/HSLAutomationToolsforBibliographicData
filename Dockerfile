@@ -26,7 +26,7 @@ COPY flasky.py config.py boot.sh run_flask.sh ./
 EXPOSE 8000
 
 RUN useradd flasky
-RUN usermod -u 1001380000 flasky
+RUN usermod -u 1000530000 flasky
 RUN chown -R flasky:flasky /home/flasky
 
 # ENTRYPOINT ["./boot.sh"]
