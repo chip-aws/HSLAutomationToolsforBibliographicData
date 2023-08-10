@@ -1,5 +1,5 @@
 #!/bin/sh
-deactivate
+#deactivate
 . venv/bin/activate
 # source venv/bin/activate
 export FLASK_APP=flasky.py
