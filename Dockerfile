@@ -23,7 +23,7 @@ COPY uploads uploads
 
 COPY flasky.py config.py boot.sh run_flask.sh ./
 # runtime configuration
-EXPOSE 5000
+EXPOSE 8000
 
 RUN useradd flasky
 # RUN usermod -u 1001380000 flasky
