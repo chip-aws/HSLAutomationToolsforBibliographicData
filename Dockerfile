@@ -22,6 +22,9 @@ COPY tests tests
 COPY uploads uploads
 
 COPY flasky.py config.py boot.sh run_flask.sh ./
+
+ENV NLTK_DATA=/home/flasky/results
+
 # runtime configuration
 EXPOSE 8000
 
