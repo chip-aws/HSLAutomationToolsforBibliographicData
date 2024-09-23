@@ -26,7 +26,7 @@ COPY flasky.py config.py boot.sh run_flask.sh ./
 ENV NLTK_DATA=/home/flasky/results
 
 # runtime configuration
-EXPOSE 8000
+EXPOSE 8080
 
 # RUN useradd flasky
 # RUN usermod -u 1001380000 flasky
